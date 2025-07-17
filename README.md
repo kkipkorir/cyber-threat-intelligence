@@ -1,7 +1,7 @@
 
 # 🛡️ Text-Based Cyber Threat Detection (Simplified Overview)
 
-![Cybersecurity](https://upload.wikimedia.org/wikipedia/commons/7/70/Cybersecurity_image.png)
+![glowing-digital-lock-surrounded-by-600nw-2517566697.webp](attachment:1b412027-2e17-4314-b6f5-451a1cb560da.webp)
 
 **Team:** Kelvin Kipkorir, Lucy Mutua, Charles Mutembei, Sharon Aoko, Victor Musyoki
 
