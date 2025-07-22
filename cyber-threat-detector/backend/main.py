@@ -10,16 +10,18 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from pydantic import BaseModel
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import tokenizer_from_json
+import json
 
 # Initialize the FastAPI app
 app = FastAPI(title="Cyber Threat Detector API", version="1.0.0")
 
 # Define constants
 MAX_SEQ_LEN = 250
-BASE_DIR = Path(__file__).resolve(strict=True).parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 MODEL_PATH = BASE_DIR / "model" / "improved_base_model.h5"   
-TOKENIZER_PATH = BASE_DIR / "model" / "tokenizer.pkl"
+TOKENIZER_PATH = BASE_DIR / "model" / "tokenizer.json"
 
 #Pydantic Model for Input Validation
 class TextInput(BaseModel):
@@ -35,27 +37,23 @@ stop_words = None
 #Startup Event to Load Models and NLTK data 
 @app.on_event("startup")
 def load_resources():
-    """Load model, tokenizer, and NLTK resources at startup."""
     global model, tokenizer, lemmatizer, stop_words
-    
+
     print("Loading model and tokenizer...")
-    # Load the trained model
     model = tf.keras.models.load_model(MODEL_PATH)
-    
-    # Load the tokenizer
-    with open(TOKENIZER_PATH, 'rb') as handle:
-        tokenizer = pickle.load(handle)
-    
+
+    with open(TOKENIZER_PATH, "r") as f:
+        tokenizer_json = f.read()
+        tokenizer = tokenizer_from_json(tokenizer_json)
+
     print("Loading NLTK resources...")
-    # Download necessary NLTK data
     nltk.download('wordnet', quiet=True)
     nltk.download('stopwords', quiet=True)
     nltk.download('punkt', quiet=True)
-    
-    # Initialize lemmatizer and stopwords
+
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
-    
+
     print("Resources loaded successfully.")
 
 #Text Preprocessing Function 

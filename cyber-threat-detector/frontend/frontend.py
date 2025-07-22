@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 #API Configuration
-API_URL = "http://127.0.0.1:8000/predict/"
+API_URL = st.secrets.get("API_URL", "http://127.0.0.1:8000/predict/")
 
 #UI Design 
 st.title("🛡️ Text-Based Cyber Threat Detector")

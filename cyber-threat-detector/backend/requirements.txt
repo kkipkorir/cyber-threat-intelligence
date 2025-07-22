@@ -1,8 +1,7 @@
 fastapi
 uvicorn[standard]
 python-multipart
-streamlit
 tensorflow
 nltk
 scikit-learn
-requests
+pydantic
