@@ -94,11 +94,5 @@ Thumbs.db
 # This ensures your local secrets are NEVER committed to GitHub.
 .streamlit/secrets.toml
 
-# Large model files (Optional, but good practice if using Git LFS)
-# If your model file is large (>100MB), you should use Git LFS.
-# For now, we'll just ignore it to be safe if you decide not to use LFS.
-# If you are using LFS, you can remove the line below.
-# model/*.h5
-
 # Keras model checkpoints (if you generate them outside the `model` dir)
 *.keras
